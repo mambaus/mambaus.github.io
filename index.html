@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rayhan Aditya — Web Designer & UI/UX Creator portfolio." />
+  <title>Rayhan Aditya — Web Designer & UI/UX Creator</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#080808;
+      --panel:#0d0d0d;
+      --panel-2:#111111;
+      --text:#f3f3f3;
+      --muted:#8f8f8f;
+      --line:#292929;
+      --red:#e50920;
+      --red-dark:#a90716;
+      --max:1320px;
+      --ease:cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:"Inter",sans-serif;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    img{display:block;max-width:100%}
+
+    ::selection{background:var(--red);color:#fff}
+
+    .noise{
+      position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.035;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    }
+
+    .container{width:min(calc(100% - 48px),var(--max));margin:auto}
+    .section{border-bottom:1px solid var(--line)}
+    .red{color:var(--red)}
+
+    /* NAV */
+    .topbar{
+      height:72px;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;justify-content:space-between;
+      font-size:9px;text-transform:uppercase;letter-spacing:.12em;
+    }
+    .topbar .left strong{display:block;color:var(--red);font-weight:700;margin-bottom:4px}
+    .topbar .left span{color:#777}
+    .availability{display:flex;gap:18px;align-items:center;color:#858585}
+    .availability i{
+      width:10px;height:10px;background:var(--red);display:block;
+      transform:rotate(45deg);box-shadow:0 0 18px rgba(229,9,32,.5)
+    }
+
+    /* HERO */
+    .hero{min-height:700px;position:relative;overflow:hidden}
+    .hero-grid{
+      display:grid;grid-template-columns:1.05fr .95fr;min-height:700px;
+      position:relative;
+    }
+    .hero-title{
+      position:absolute;left:0;right:0;top:15px;
+      font-size:clamp(110px,15.6vw,245px);
+      line-height:.78;font-weight:900;letter-spacing:-.075em;
+      color:var(--red);opacity:.9;white-space:nowrap;pointer-events:none;
+      transform:translate3d(var(--title-x,0),var(--title-y,0),0);
+      transition:transform .1s linear;
+    }
+    .hero-copy{
+      z-index:2;align-self:end;padding:0 0 92px;
+      max-width:360px;
+    }
+    .script{
+      font-family:"Nothing You Could Do",cursive;font-size:38px;
+      margin-bottom:4px;color:#ddd;transform:rotate(-4deg);display:inline-block;
+    }
+    .hero-copy h1{
+      font-size:clamp(55px,7vw,88px);line-height:.78;
+      letter-spacing:-.055em;font-weight:900;text-transform:uppercase;
+      margin-bottom:20px;
+    }
+    .hero-copy h1 span{display:block}
+    .role{
+      color:var(--red);font-size:15px;font-weight:800;line-height:1.1;
+      text-transform:uppercase;letter-spacing:.01em;margin-bottom:17px;
+    }
+    .intro{
+      color:#8e8e8e;font-size:11px;line-height:1.7;max-width:310px;margin-bottom:20px;
+    }
+    .worldwide{font-size:8px;text-transform:uppercase;color:#aaa;letter-spacing:.09em;display:flex;gap:8px;align-items:center}
+    .worldwide b{width:12px;height:12px;border:1px solid var(--red);border-radius:50%;display:inline-block;position:relative}
+    .worldwide b:after{content:"";position:absolute;left:2px;right:2px;top:5px;border-top:1px solid var(--red)}
+
+    .portrait-wrap{
+      position:relative;z-index:3;align-self:end;height:610px;
+      display:flex;align-items:flex-end;justify-content:center;
+      transform:translate3d(var(--portrait-x,0),var(--portrait-y,0),0);
+      transition:transform .1s linear;
+    }
+    .portrait{
+      width:min(440px,80%);height:590px;object-fit:cover;object-position:center top;
+      filter:grayscale(1) contrast(1.08) brightness(.63);
+      mix-blend-mode:screen;
+      mask-image:linear-gradient(to bottom,#000 72%,transparent 100%);
+      -webkit-mask-image:linear-gradient(to bottom,#000 72%,transparent 100%);
+    }
+    .red-light{
+      position:absolute;width:330px;height:460px;right:4%;bottom:90px;
+      background:radial-gradient(ellipse at center,rgba(229,9,32,.32),transparent 66%);
+      filter:blur(18px);pointer-events:none;
+    }
+    .hero-stats{
+      z-index:4;align-self:end;padding:0 0 78px 36px;
+      display:flex;flex-direction:column;gap:22px;max-width:150px;
+    }
+    .stat{border-bottom:1px solid #2a2a2a;padding-bottom:13px}
+    .stat strong{font-size:29px;color:var(--red);letter-spacing:-.04em}
+    .stat span{display:block;color:#777;font-size:8px;text-transform:uppercase;line-height:1.4;margin-top:2px}
+
+    /* PARALLAX DECOR */
+    .orb{
+      position:absolute;border-radius:50%;pointer-events:none;z-index:1;
+      background:radial-gradient(circle,rgba(229,9,32,.28),rgba(229,9,32,0) 68%);
+      filter:blur(8px);
+    }
+    .orb.one{width:240px;height:240px;left:-120px;top:180px}
+    .orb.two{width:200px;height:200px;right:-100px;top:60px}
+    .cross{position:absolute;color:var(--red);font-size:22px;font-weight:300;z-index:5}
+
+    /* PROJECTS */
+    .section-head{display:flex;align-items:center;justify-content:space-between;padding:21px 0 18px}
+    .section-head h2{font-size:17px;text-transform:uppercase;letter-spacing:-.03em}
+    .section-head a{font-size:8px;text-transform:uppercase;color:#888;display:flex;gap:18px;align-items:center}
+    .arrow{font-size:20px;color:#aaa}
+
+    .projects-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0 0 28px;
+    }
+    .project{min-width:0}
+    .project-visual{
+      height:180px;border:1px solid #282828;position:relative;overflow:hidden;
+      background:#111;transition:transform .6s var(--ease),border-color .3s;
+    }
+    .project:hover .project-visual{transform:translateY(-7px);border-color:#555}
+    .project-visual:after{
+      content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.05),transparent 35%,rgba(0,0,0,.4));
+      pointer-events:none;
+    }
+    .project-visual img{width:100%;height:100%;object-fit:cover;filter:brightness(.65) contrast(1.05)}
+    .project-info{display:grid;grid-template-columns:30px 1fr 25px;gap:10px;align-items:center;padding-top:13px}
+    .project-number{color:var(--red);font-size:21px;font-weight:700}
+    .project-info strong{font-size:9px;text-transform:uppercase;display:block}
+    .project-info small{color:#777;font-size:8px;text-transform:uppercase;display:block;margin-top:4px}
+    .project-arrow{font-size:22px;color:#aaa}
+
+    /* EDUCATION / PROCESS */
+    .info-grid{display:grid;grid-template-columns:1fr 1fr 290px}
+    .info-col{padding:28px 24px 30px 0;border-right:1px solid var(--line)}
+    .info-col:nth-child(2){padding-left:28px}
+    .info-col:last-child{padding:0;border:0}
+    .eyebrow{color:var(--red);font-size:9px;font-weight:700;text-transform:uppercase;margin-bottom:17px}
+    .education-item{border-bottom:1px solid #222;padding:0 0 16px;margin-bottom:16px;display:grid;grid-template-columns:1fr auto;gap:10px}
+    .education-item strong{font-size:10px;font-weight:600;display:block}
+    .education-item small{font-size:9px;color:#777;display:block;margin-top:5px}
+    .year{color:var(--red);font-size:8px;white-space:nowrap}
+
+    .skills-title{margin-top:24px}
+    .skills{display:flex;flex-wrap:wrap;gap:7px}
+    .skill{border:1px solid #333;padding:8px 10px;color:#aaa;font-size:7px;text-transform:uppercase}
+
+    .process{position:relative;padding-left:56px}
+    .process:before{
+      content:"";position:absolute;left:19px;top:8px;bottom:8px;width:1px;background:#3a3a3a;
+    }
+    .step{position:relative;display:grid;grid-template-columns:42px 1fr;gap:12px;margin-bottom:16px}
+    .step:last-child{margin-bottom:0}
+    .step-icon{
+      position:absolute;left:-56px;top:-2px;width:39px;height:39px;border:1px solid #444;border-radius:50%;
+      background:#0b0b0b;display:grid;place-items:center;color:#ddd;font-size:14px;z-index:2;
+    }
+    .step-number{color:var(--red);font-size:10px;padding-top:3px}
+    .step h3{font-size:9px;color:var(--red);text-transform:uppercase;margin-bottom:4px}
+    .step p{font-size:8px;line-height:1.5;color:#777}
+
+    .quote{
+      height:100%;min-height:310px;background:var(--red);padding:31px 25px;
+      display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden
+    }
+    .quote:after{content:"“";position:absolute;right:-16px;top:-54px;font-size:180px;line-height:1;opacity:.13}
+    .quote-mark{font-size:46px;line-height:.6}
+    .quote p{font-family:Georgia,serif;font-size:16px;line-height:1.35;position:relative;z-index:1}
+    .signature{font-family:"Nothing You Could Do",cursive;font-size:25px;transform:rotate(-6deg);display:inline-block}
+    .quote small{font-size:8px;text-transform:uppercase;line-height:1.5;opacity:.8}
+
+    /* CONTACT */
+    .contact{
+      min-height:250px;display:grid;grid-template-columns:1.05fr 1fr .9fr;
+      align-items:center;gap:40px;position:relative;overflow:hidden
+    }
+    .contact h2{font-size:30px;line-height:1.05;text-transform:uppercase;letter-spacing:-.05em}
+    .contact p{color:#777;font-size:9px;line-height:1.55;max-width:260px;margin:15px 0 23px}
+    .freelance{
+      display:inline-flex;align-items:center;gap:10px;color:var(--red);
+      font-size:8px;text-transform:uppercase
+    }
+    .round-arrow{width:27px;height:27px;border:1px solid var(--red);border-radius:50%;display:grid;place-items:center;font-size:16px}
+    .contacts{display:flex;flex-direction:column}
+    .contact-row{display:grid;grid-template-columns:30px 1fr;gap:13px;align-items:center;padding:11px 0;border-bottom:1px solid #282828}
+    .contact-icon{width:23px;height:23px;border:1px solid #444;border-radius:50%;display:grid;place-items:center;font-size:10px;color:#bbb}
+    .contact-row span{font-size:8px;color:#aaa}
+    .device{
+      position:relative;height:200px;display:flex;align-items:center;justify-content:center
+    }
+    .laptop{
+      width:285px;height:175px;border:2px solid #333;border-radius:9px 9px 5px 5px;
+      transform:perspective(500px) rotateY(-11deg) rotateX(3deg);
+      background:linear-gradient(135deg,#121212,#050505);position:relative;box-shadow:0 25px 50px #000
+    }
+    .screen{
+      position:absolute;inset:8px;border-radius:4px;background:#111;overflow:hidden;
+      border:1px solid #222;padding:17px
+    }
+    .screen .mini-title{font-size:12px;font-weight:800;line-height:.9;text-transform:uppercase;width:90px}
+    .screen .mini-title b{color:var(--red)}
+    .screen .mini-bar{height:2px;background:#333;width:100%;margin:12px 0}
+    .screen .mini-red{width:40px;height:30px;background:var(--red);position:absolute;right:25px;top:45px;transform:skew(-20deg)}
+    .base{
+      position:absolute;width:325px;height:9px;bottom:-10px;left:-21px;
+      background:#1b1b1b;border-radius:0 0 30px 30px;box-shadow:0 5px 15px #000
+    }
+    .cup{
+      width:56px;height:50px;background:#111;border:1px solid #222;border-radius:4px 4px 18px 18px;
+      position:absolute;left:15px;bottom:20px;box-shadow:0 8px 20px #000
+    }
+    .cup:after{content:"R";position:absolute;inset:0;display:grid;place-items:center;color:#555;font-weight:700}
+    .cup-handle{position:absolute;width:18px;height:22px;border:2px solid #222;border-left:0;border-radius:0 13px 13px 0;right:-17px;top:10px}
+
+    footer{border-top:1px solid var(--line);padding:16px 0;color:#555;font-size:7px;text-transform:uppercase;letter-spacing:.1em;display:flex;justify-content:space-between}
+
+    /* SCROLL REVEAL */
+    .reveal{opacity:0;transform:translateY(35px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .container{width:min(calc(100% - 30px),var(--max))}
+      .hero-grid{grid-template-columns:1fr;min-height:820px}
+      .hero-title{font-size:20vw;top:70px}
+      .hero-copy{padding-bottom:35px;max-width:310px}
+      .portrait-wrap{position:absolute;right:-45px;bottom:0;width:62%;height:620px}
+      .portrait{width:100%;height:610px}
+      .hero-stats{position:absolute;right:0;bottom:20px;padding:0;width:120px}
+      .projects-grid{grid-template-columns:1fr}
+      .project-visual{height:240px}
+      .info-grid{grid-template-columns:1fr}
+      .info-col,.info-col:nth-child(2){border-right:0;border-bottom:1px solid var(--line);padding:28px 0}
+      .info-col:last-child{padding:0}
+      .quote{min-height:250px}
+      .contact{grid-template-columns:1fr;gap:20px;padding:40px 0}
+      .device{display:none}
+    }
+
+    @media(max-width:560px){
+      .topbar{height:62px}
+      .availability{gap:8px}
+      .hero{min-height:730px}
+      .hero-grid{min-height:730px}
+      .hero-title{font-size:24vw;top:90px}
+      .hero-copy{padding-bottom:30px}
+      .script{font-size:30px}
+      .hero-copy h1{font-size:58px}
+      .portrait-wrap{right:-75px;width:72%;height:535px}
+      .portrait{height:530px}
+      .hero-stats{bottom:22px;width:95px}
+      .stat strong{font-size:23px}
+      .stat span{font-size:7px}
+      .section-head h2{font-size:14px}
+      .project-visual{height:190px}
+      footer{flex-direction:column;gap:8px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="noise"></div>
+
+  <header class="topbar container">
+    <div class="left">
+      <strong>WEB DESIGNER</strong>
+      <span>DIGITAL CREATOR</span>
+    </div>
+    <div class="availability">
+      <span>AVAILABLE FOR FREELANCE</span>
+      <i></i>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section">
+      <div class="orb one parallax" data-speed="0.14"></div>
+      <div class="orb two parallax" data-speed="-0.10"></div>
+      <span class="cross" style="right:3%;top:26px;">✦</span>
+
+      <div class="container hero-grid">
+        <div class="hero-title parallax-title">PORTFOLIO</div>
+
+        <div class="hero-copy reveal">
+          <div class="script">Hello, I'm</div>
+          <h1><span>RAYHAN</span><span>ADITYA</span></h1>
+          <div class="role">WEB DESIGNER &amp;<br>UI/UX CREATOR</div>
+          <p class="intro">
+            I design and build stylish, user-focused web experiences that combine creativity with strategy.
+            Passionate about clean design, smooth interactions, and details that make a difference.
+          </p>
+          <div class="worldwide"><b></b> AVAILABLE WORLDWIDE</div>
+        </div>
+
+        <div class="portrait-wrap parallax-layer">
+          <div class="red-light"></div>
+          <img class="portrait"
+            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=85"
+            alt="Creative portrait">
+        </div>
+
+        <div class="hero-stats reveal">
+          <div class="stat"><strong>3+</strong><span>YEARS<br>EXPERIENCE</span></div>
+          <div class="stat"><strong>40+</strong><span>PROJECTS<br>COMPLETED</span></div>
+          <div class="stat"><strong>20+</strong><span>HAPPY<br>CLIENTS</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <h2>SELECTED PROJECTS</h2>
+          <a href="#contact">VIEW ALL PROJECTS <span class="arrow">→</span></a>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project reveal">
+            <div class="project-visual">
+              <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=1000&q=85" alt="Veloce bikes project">
+            </div>
+            <div class="project-info">
+              <div class="project-number">01</div>
+              <div><strong>VELOCE BIKES</strong><small>E-COMMERCE WEBSITE</small></div>
+              <div class="project-arrow">→</div>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <div class="project-visual">
+              <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=85" alt="Woodcraft furniture project">
+            </div>
+            <div class="project-info">
+              <div class="project-number">02</div>
+              <div><strong>WOODCRAFT</strong><small>FURNITURE WEBSITE</small></div>
+              <div class="project-arrow">→</div>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <div class="project-visual">
+              <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1000&q=85" alt="Urbanic fashion magazine project">
+            </div>
+            <div class="project-info">
+              <div class="project-number">03</div>
+              <div><strong>URBANIC</strong><small>FASHION MAGAZINE</small></div>
+              <div class="project-arrow">→</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container info-grid">
+        <div class="info-col reveal">
+          <div class="eyebrow">EDUCATION</div>
+
+          <div class="education-item">
+            <div><strong>B.Sc. in Visual Communication Design</strong><small>Binus University</small></div>
+            <span class="year">2018 - 2022</span>
+          </div>
+
+          <div class="education-item">
+            <div><strong>UI/UX Design Certification</strong><small>Google Career Certificates</small></div>
+            <span class="year">2023</span>
+          </div>
+
+          <div class="eyebrow skills-title">SKILLS</div>
+          <div class="skills">
+            <span class="skill">WEB DESIGN</span>
+            <span class="skill">UI/UX DESIGN</span>
+            <span class="skill">FIGMA</span>
+            <span class="skill">FRAMER</span>
+            <span class="skill">ADOBE XD</span>
+            <span class="skill">PHOTOSHOP</span>
+            <span class="skill">WEBFLOW</span>
+            <span class="skill">HTML / CSS</span>
+            <span class="skill">JAVASCRIPT</span>
+            <span class="skill">GSAP ANIMATION</span>
+            <span class="skill">SEO BASICS</span>
+          </div>
+        </div>
+
+        <div class="info-col reveal">
+          <div class="eyebrow" style="color:#f3f3f3;font-size:17px;letter-spacing:-.03em;">WORK PROCESS</div>
+          <div class="process">
+            <div class="step">
+              <div class="step-icon">⌕</div>
+              <div class="step-number">01</div>
+              <div><h3>DISCOVER</h3><p>Understanding goals, audience, and project requirements.</p></div>
+            </div>
+            <div class="step">
+              <div class="step-icon">♧</div>
+              <div class="step-number">02</div>
+              <div><h3>IDEATE</h3><p>Planning, wireframing, and creating the right concept.</p></div>
+            </div>
+            <div class="step">
+              <div class="step-icon">↗</div>
+              <div class="step-number">03</div>
+              <div><h3>DESIGN</h3><p>Crafting visual design with a focus on user experience.</p></div>
+            </div>
+            <div class="step">
+              <div class="step-icon">&lt;/&gt;</div>
+              <div class="step-number">04</div>
+              <div><h3>DEVELOP</h3><p>Building fast, responsive, and high-performing websites.</p></div>
+            </div>
+            <div class="step">
+              <div class="step-icon">➤</div>
+              <div class="step-number">05</div>
+              <div><h3>DELIVER</h3><p>Testing, optimizing, and launching with perfection.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="quote reveal">
+          <div class="quote-mark">“</div>
+          <p>Good design<br>is not just how<br>it looks, but how<br>it works.</p>
+          <span class="signature">Rayhan</span>
+          <small>LET'S CREATE<br>SOMETHING GREAT<br>TOGETHER.</small>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact">
+        <div class="reveal">
+          <h2>LET'S WORK<br>TOGETHER <span class="red">✦</span></h2>
+          <p>I'm currently open for new projects and collaborations. Let's create something amazing that drives results.</p>
+          <a class="freelance" href="mailto:hello@rayhanaditya.com">
+            <span class="round-arrow">→</span> AVAILABLE FOR FREELANCE
+          </a>
+        </div>
+
+        <div class="contacts reveal">
+          <a class="contact-row" href="mailto:hello@rayhanaditya.com">
+            <span class="contact-icon">✉</span><span>hello@rayhanaditya.com</span>
+          </a>
+          <a class="contact-row" href="https://www.rayhanaditya.com" target="_blank" rel="noopener">
+            <span class="contact-icon">◎</span><span>www.rayhanaditya.com</span>
+          </a>
+          <a class="contact-row" href="tel:+6281234567890">
+            <span class="contact-icon">⌕</span><span>+62 812 3456 7890</span>
+          </a>
+          <div class="contact-row">
+            <span class="contact-icon">⌖</span><span>Jakarta, Indonesia</span>
+          </div>
+        </div>
+
+        <div class="device reveal parallax-layer">
+          <div class="cup"><span class="cup-handle"></span></div>
+          <div class="laptop">
+            <div class="screen">
+              <div class="mini-title">WE<br>DESIGN<br><b>DIGITAL</b><br>EXPERIENCES</div>
+              <div class="mini-red"></div>
+              <div class="mini-bar"></div>
+              <div class="mini-bar" style="width:55%"></div>
+            </div>
+            <div class="base"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <span>© 2025 RAYHAN ADITYA</span>
+    <span>WEB DESIGNER &amp; UI/UX CREATOR</span>
+  </footer>
+
+  <script>
+    (() => {
+      // Scroll reveal
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      reveals.forEach(el => observer.observe(el));
+
+      // Mouse + scroll parallax
+      const hero = document.querySelector('.hero');
+      const title = document.querySelector('.parallax-title');
+      const portrait = document.querySelector('.parallax-layer');
+      const orbs = document.querySelectorAll('.parallax');
+      let mx = 0, my = 0, cx = 0, cy = 0;
+
+      window.addEventListener('pointermove', (e) => {
+        mx = (e.clientX / window.innerWidth - .5) * 2;
+        my = (e.clientY / window.innerHeight - .5) * 2;
+      }, { passive:true });
+
+      function render() {
+        cx += (mx - cx) * .055;
+        cy += (my - cy) * .055;
+
+        if (title && hero) {
+          const rect = hero.getBoundingClientRect();
+          const progress = Math.max(-1, Math.min(1, -rect.top / Math.max(1, hero.offsetHeight)));
+          title.style.setProperty('--title-x', `${cx * 12}px`);
+          title.style.setProperty('--title-y', `${progress * 42 + cy * 4}px`);
+        }
+
+        if (portrait) {
+          portrait.style.setProperty('--portrait-x', `${cx * -10}px`);
+          portrait.style.setProperty('--portrait-y', `${cy * -7}px`);
+        }
+
+        orbs.forEach((orb, i) => {
+          const speed = parseFloat(orb.dataset.speed || 0);
+          const y = window.scrollY * speed;
+          orb.style.transform = `translate3d(${cx * (i + 1) * 12}px, ${y + cy * 10}px, 0)`;
+        });
+
+        requestAnimationFrame(render);
+      }
+      render();
+
+      // Subtle 3D tilt for project cards
+      document.querySelectorAll('.project-visual').forEach(card => {
+        card.addEventListener('pointermove', e => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - .5;
+          const y = (e.clientY - r.top) / r.height - .5;
+          card.style.transform = `perspective(700px) rotateX(${y * -3}deg) rotateY(${x * 4}deg) translateY(-7px)`;
+        });
+        card.addEventListener('pointerleave', () => {
+          card.style.transform = '';
+        });
+      });
+
+      // Smooth anchor navigation
+      document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', e => {
+          const target = document.querySelector(link.getAttribute('href'));
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior:'smooth', block:'start' });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
