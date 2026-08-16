@@ -260,22 +260,26 @@
       min-height: 520px;
     }
 
-    .hero-word {
-      position: absolute;
-      z-index: 1;
-      top: 20px;
-      left: 0;
-      width: 100%;
-      color: var(--rose-light);
-      font-size: clamp(120px, 19vw, 265px);
-      line-height: 0.78;
-      letter-spacing: -0.035em;
-      white-space: nowrap;
-      pointer-events: none;
-      user-select: none;
-      transform: translate3d(var(--word-x, 0px), var(--word-y, 0px), 0);
-      will-change: transform;
-    }
+   .hero-word {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  left: 0;
+  width: 100%;
+  color: var(--rose-light);
+  font-size: clamp(120px, 19vw, 265px);
+  line-height: 0.78;
+  letter-spacing: -0.035em;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+  transform: translate3d(var(--word-x, 0px), var(--word-y, 0px), 0);
+  will-change: transform;
+}
+
+.hero-word span {
+  display: block;
+}
 
     .hero-brush {
       position: absolute;
@@ -1249,6 +1253,7 @@
       .type-preview .sans {
         font-size: 31px;
       }
+
     }
 
     /* Reduced motion */
@@ -1298,7 +1303,8 @@
       <div class="container hero-inner">
 
         <div class="hero-word display parallax-word" aria-hidden="true">
-          PORTFOLIO
+          <span>HAURA TAQIYA</span>
+            <span>AZZA NABILA</span>
         </div>
 
         <div class="hero-brush parallax-slow" aria-hidden="true"></div>
@@ -1315,13 +1321,6 @@
             <span>that Leave</span>
             <span>a Mark.</span>
           </div>
-        </div>
-
-        <div class="hero-person parallax-person">
-          <img
-            src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=90"
-            alt="Portrait for Marina Voss portfolio"
-          >
         </div>
 
         <div class="hero-person-info reveal">
@@ -1612,13 +1611,6 @@
               <span>Los Angeles, CA</span>
             </div>
           </div>
-        </div>
-
-        <div class="contact-person parallax-contact">
-          <img
-            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=90"
-            alt="Marina Voss portrait"
-          >
         </div>
 
         <div class="contact-circle" aria-hidden="true"></div>
