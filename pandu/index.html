@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>panduuuuuu — panduuuuuu
+</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+POPP
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#090909;
+    color:#d9c6aa;
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font:inherit;
+}
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+    --bg:#090909;
+    --bg2:#0d0d0d;
+    --gold:#c9b18e;
+    --gold-light:#dfc9a8;
+    --muted:#89827a;
+    --line:rgba(201,177,142,.22);
+    --white:#e9e5df;
+    --serif:'Playfair Display',serif;
+    --mono:'DM Mono',monospace;
+}
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+.cursor{
+    position:fixed;
+    width:8px;
+    height:8px;
+    background:var(--gold);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9999;
+    transform:translate(-50%,-50%);
+    transition:transform .15s ease;
+    mix-blend-mode:difference;
+}
+
+.cursor-ring{
+    position:fixed;
+    width:32px;
+    height:32px;
+    border:1px solid rgba(201,177,142,.55);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9998;
+    transform:translate(-50%,-50%);
+    transition:
+        width .25s ease,
+        height .25s ease,
+        transform .08s linear;
+}
+
+body.hovering .cursor-ring{
+    width:52px;
+    height:52px;
+}
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.loader{
+    position:fixed;
+    inset:0;
+    background:#090909;
+    z-index:10000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    transition:opacity 1s ease,visibility 1s ease;
+}
+
+.loader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.loader-logo{
+    font-family:var(--serif);
+    font-size:42px;
+    letter-spacing:8px;
+    color:var(--gold);
+    animation:pulse 1.5s infinite alternate;
+}
+
+.loader-line{
+    width:100px;
+    height:1px;
+    background:var(--gold);
+    margin-top:25px;
+    transform-origin:left;
+    animation:loaderLine 1.5s ease infinite;
+}
+
+@keyframes loaderLine{
+    0%{transform:scaleX(0)}
+    100%{transform:scaleX(1)}
+}
+
+@keyframes pulse{
+    from{opacity:.35}
+    to{opacity:1}
+}
+
+/* =========================================================
+   GRAIN
+========================================================= */
+
+.grain{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:999;
+    opacity:.055;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 4.5vw;
+    z-index:1000;
+    background:linear-gradient(
+        to bottom,
+        rgba(9,9,9,.96),
+        rgba(9,9,9,.4),
+        transparent
+    );
+    transition:.4s ease;
+}
+
+.nav.scrolled{
+    background:rgba(9,9,9,.94);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(12px);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo-symbol{
+    font-family:var(--serif);
+    font-size:25px;
+    letter-spacing:-4px;
+}
+
+.logo-name{
+    font-family:var(--mono);
+    font-size:9px;
+    letter-spacing:2.5px;
+    color:#aaa29a;
+}
+
+.nav-links{
+    display:flex;
+    gap:34px;
+}
+
+.nav-links a{
+    font-family:var(--mono);
+    font-size:8px;
+    letter-spacing:.7px;
+    color:#aaa;
+    position:relative;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    bottom:-7px;
+    left:0;
+    width:0;
+    height:1px;
+    background:var(--gold);
+    transition:.3s ease;
+}
+
+.nav-links a:hover{
+    color:var(--gold);
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+.nav-button{
+    border:1px solid rgba(201,177,142,.45);
+    padding:12px 16px;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    font-family:var(--mono);
+    font-size:8px;
+    letter-spacing:.7px;
+    color:var(--gold);
+    transition:.3s;
+}
+
+.nav-button span{
+    font-size:16px;
+    line-height:0;
+}
+
+.nav-button:hover{
+    background:var(--gold);
+    color:#090909;
+}
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+.container{
+    width:91%;
+    max-width:1350px;
+    margin:auto;
+}
+
+.section{
+    padding:95px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.section-title{
+    font-family:var(--serif);
+    font-size:14px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-weight:400;
+}
+
+.section-desc{
+    font-family:var(--mono);
+    font-size:7px;
+    letter-spacing:1px;
+    color:#777;
+    text-transform:uppercase;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100vh;
+    position:relative;
+    padding-top:90px;
+    overflow:hidden;
+}
+
+.hero-title{
+    position:absolute;
+    top:105px;
+    left:4%;
+    width:92%;
+    text-align:center;
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(100px,17.5vw,270px);
+    line-height:.72;
+    letter-spacing:-9px;
+    color:#d2bfa3;
+    white-space:nowrap;
+    z-index:1;
+    animation:titleReveal 1.7s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes titleReveal{
+    from{
+        opacity:0;
+        transform:translateY(70px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.hero-image{
+    position:absolute;
+    width:min(38vw,480px);
+    height:550px;
+    left:50%;
+    top:140px;
+    transform:translateX(-50%);
+    z-index:2;
+    overflow:hidden;
+}
+
+.hero-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:grayscale(35%) contrast(1.05);
+    transform:scale(1.08);
+    animation:heroImage 2s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes heroImage{
+    from{
+        transform:scale(1.25);
+        opacity:0;
+    }
+    to{
+        transform:scale(1.08);
+        opacity:1;
+    }
+}
+
+.hero-image::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to bottom,
+        transparent 65%,
+        #090909 100%
+    );
+}
+
+.hero-copy{
+    position:absolute;
+    left:4.5%;
+    top:390px;
+    z-index:4;
+    width:230px;
+}
+
+.hero-copy h2{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:3px;
+    line-height:1.5;
+    font-weight:400;
+    color:#d8d0c7;
+}
+
+.hero-copy p{
+    margin-top:15px;
+    color:#777;
+    font-size:8px;
+    line-height:1.7;
+    max-width:190px;
+}
+
+.hero-button{
+    display:inline-flex;
+    align-items:center;
+    gap:15px;
+    margin-top:25px;
+    font-family:var(--mono);
+    font-size:8px;
+    letter-spacing:1px;
+}
+
+.hero-button span{
+    width:20px;
+    height:20px;
+    border:1px solid #655846;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+}
+
+.hero-button:hover span{
+    background:var(--gold);
+    color:#090909;
+    transform:rotate(45deg);
+}
+
+.hero-orbit{
+    position:absolute;
+    right:8%;
+    top:330px;
+    width:130px;
+    height:130px;
+    border:1px solid rgba(201,177,142,.25);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    animation:spin 18s linear infinite;
+}
+
+.hero-orbit::before{
+    content:"✦";
+    font-size:35px;
+    color:var(--gold);
+    animation:spinReverse 18s linear infinite;
+}
+
+.hero-orbit::after{
+    content:"CREATIVE DESIGN • BASED IN MILAN • ";
+    position:absolute;
+    inset:-20px;
+    font-family:var(--mono);
+    font-size:6px;
+    letter-spacing:2px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#806f59;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
+
+@keyframes spinReverse{
+    to{transform:rotate(-360deg)}
+}
+
+.scroll-indicator{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    font-family:var(--mono);
+    font-size:7px;
+    letter-spacing:2px;
+    color:#655d55;
+}
+
+.scroll-indicator::after{
+    content:"";
+    display:block;
+    width:1px;
+    height:35px;
+    margin:10px auto 0;
+    background:#655d55;
+    animation:scrollLine 1.5s infinite;
+}
+
+@keyframes scrollLine{
+    0%,100%{transform:scaleY(.4);transform-origin:top}
+    50%{transform:scaleY(1);transform-origin:top}
+}
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+
+.projects{
+    padding-top:35px;
+}
+
+.project-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
+}
+
+.project{
+    height:300px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(201,177,142,.2);
+    cursor:pointer;
+}
+
+.project img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:brightness(.65) saturate(.7);
+    transition:
+        transform .8s cubic-bezier(.16,1,.3,1),
+        filter .5s;
+}
+
+.project:hover img{
+    transform:scale(1.08);
+    filter:brightness(.8) saturate(.85);
+}
+
+.project::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.8),
+        transparent 55%
+    );
+}
+
+.project-number{
+    position:absolute;
+    left:13px;
+    top:13px;
+    z-index:2;
+    font-family:var(--mono);
+    font-size:9px;
+}
+
+.project-info{
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    z-index:2;
+}
+
+.project-info h3{
+    font-family:var(--serif);
+    font-size:13px;
+    letter-spacing:1px;
+    font-weight:400;
+}
+
+.project-info p{
+    font-family:var(--mono);
+    font-size:7px;
+    color:#aaa;
+    margin-top:5px;
+}
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+}
+
+.service{
+    padding:20px 25px 20px 10px;
+    min-height:145px;
+    border-right:1px solid var(--line);
+    position:relative;
+}
+
+.service:last-child{
+    border-right:0;
+}
+
+.service-icon{
+    width:38px;
+    height:38px;
+    margin-bottom:17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    color:var(--gold);
+}
+
+.service-number{
+    position:absolute;
+    top:24px;
+    left:58px;
+    font-family:var(--mono);
+    font-size:8px;
+    color:#73685b;
+}
+
+.service h3{
+    font-family:var(--mono);
+    font-size:9px;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+}
+
+.service p{
+    font-size:7px;
+    line-height:1.8;
+    color:#777;
+    margin-top:10px;
+    max-width:155px;
+}
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.process{
+    background:#0b0b0b;
+}
+
+.process-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+}
+
+.process-item{
+    position:relative;
+    padding:20px 40px 10px 25px;
+}
+
+.process-item:not(:last-child)::after{
+    content:"→";
+    position:absolute;
+    right:8px;
+    top:35px;
+    font-size:20px;
+    color:#796853;
+}
+
+.process-number{
+    font-family:var(--serif);
+    font-size:32px;
+    color:#cdb99c;
+}
+
+.process-item h3{
+    font-family:var(--mono);
+    font-size:8px;
+    letter-spacing:1px;
+    margin-top:10px;
+}
+
+.process-item p{
+    font-size:7px;
+    line-height:1.8;
+    color:#777;
+    margin-top:10px;
+    max-width:160px;
+}
+
+/* =========================================================
+   TESTIMONIAL
+========================================================= */
+
+.testimonial{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:80px;
+    align-items:center;
+}
+
+.quote{
+    position:relative;
+    padding-left:70px;
+}
+
+.quote-mark{
+    position:absolute;
+    left:0;
+    top:-25px;
+    font-family:var(--serif);
+    font-size:100px;
+    color:#55493c;
+    line-height:1;
+}
+
+.quote p{
+    font-family:var(--serif);
+    font-size:19px;
+    line-height:1.45;
+    color:#bdb5aa;
+}
+
+.client{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.client-avatar{
+    width:43px;
+    height:43px;
+    border:1px solid #675a49;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--serif);
+    font-size:16px;
+}
+
+.client-info h4{
+    font-family:var(--mono);
+    font-size:9px;
+    letter-spacing:1px;
+}
+
+.client-info p{
+    font-family:var(--mono);
+    font-size:7px;
+    color:#777;
+    margin-top:6px;
+}
+
+.stars{
+    color:#aa8e69;
+    font-size:9px;
+    margin-top:10px;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta{
+    min-height:155px;
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    border:1px solid rgba(201,177,142,.35);
+    overflow:hidden;
+}
+
+.cta-content{
+    padding:35px 45px;
+    position:relative;
+}
+
+.cta-content h2{
+    font-family:var(--serif);
+    font-size:19px;
+    font-weight:400;
+    letter-spacing:2px;
+    line-height:1.2;
+    max-width:230px;
+}
+
+.cta-content p{
+    margin-top:10px;
+    font-family:var(--mono);
+    font-size:7px;
+    color:#777;
+}
+
+.cta-button{
+    display:inline-block;
+    margin-top:17px;
+    border:1px solid #685a49;
+    padding:10px 15px;
+    font-family:var(--mono);
+    font-size:7px;
+    letter-spacing:1px;
+    transition:.3s;
+}
+
+.cta-button:hover{
+    background:var(--gold);
+    color:#090909;
+}
+
+.cta-image{
+    position:relative;
+    overflow:hidden;
+}
+
+.cta-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:brightness(.45) grayscale(.5);
+    transition:.8s;
+}
+
+.cta:hover .cta-image img{
+    transform:scale(1.05);
+}
+
+.cta-star{
+    position:absolute;
+    left:15%;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:55px;
+    color:var(--gold);
+    z-index:2;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+    padding:35px 0 25px;
+}
+
+.footer-top{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    align-items:end;
+}
+
+.footer-brand{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.footer-logo{
+    font-family:var(--serif);
+    font-size:24px;
+}
+
+.footer-name{
+    font-family:var(--mono);
+    font-size:7px;
+    letter-spacing:2px;
+}
+
+.footer-links{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+}
+
+.footer-links a{
+    font-family:var(--mono);
+    font-size:7px;
+    color:#777;
+}
+
+.footer-links a:hover{
+    color:var(--gold);
+}
+
+.footer-contact{
+    text-align:right;
+    font-family:var(--mono);
+    font-size:7px;
+    line-height:2;
+    color:#777;
+}
+
+.footer-bottom{
+    margin-top:35px;
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid rgba(255,255,255,.08);
+    padding-top:15px;
+    font-family:var(--mono);
+    font-size:6px;
+    color:#555;
+}
+
+.back-top{
+    width:40px;
+    height:40px;
+    border:1px solid #574c3e;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+}
+
+.back-top:hover{
+    background:var(--gold);
+    color:#090909;
+}
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(45px);
+    transition:
+        opacity 1s cubic-bezier(.16,1,.3,1),
+        transform 1s cubic-bezier(.16,1,.3,1);
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        min-height:850px;
+    }
+
+    .hero-title{
+        top:135px;
+        font-size:20vw;
+        letter-spacing:-4px;
+    }
+
+    .hero-image{
+        width:58vw;
+        height:470px;
+        top:230px;
+    }
+
+    .hero-copy{
+        top:auto;
+        bottom:100px;
+        left:6%;
+    }
+
+    .hero-orbit{
+        right:5%;
+        top:auto;
+        bottom:180px;
+        width:90px;
+        height:90px;
+    }
+
+    .project-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .services-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .service{
+        border-bottom:1px solid var(--line);
+    }
+
+    .process-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .process-item:nth-child(2){
+        border-right:0;
+    }
+
+    .process-item::after{
+        display:none;
+    }
+
+    .testimonial{
+        grid-template-columns:1fr;
+        gap:45px;
+    }
+
+    .cta{
+        grid-template-columns:1fr;
+    }
+
+    .cta-image{
+        height:180px;
+    }
+
+    .footer-top{
+        grid-template-columns:1fr;
+        gap:25px;
+    }
+
+    .footer-links{
+        justify-content:flex-start;
+        flex-wrap:wrap;
+    }
+
+    .footer-contact{
+        text-align:left;
+    }
+}
+
+@media(max-width:600px){
+
+    .container{
+        width:88%;
+    }
+
+    .nav{
+        padding:0 6%;
+    }
+
+    .nav-button{
+        padding:9px 11px;
+    }
+
+    .hero{
+        min-height:780px;
+    }
+
+    .hero-title{
+        top:145px;
+        font-size:21vw;
+    }
+
+    .hero-image{
+        width:72vw;
+        height:400px;
+        top:240px;
+    }
+
+    .hero-copy{
+        bottom:55px;
+    }
+
+    .hero-orbit{
+        display:none;
+    }
+
+    .section{
+        padding:70px 0;
+    }
+
+    .section-head{
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .section-desc{
+        text-align:right;
+    }
+
+    .project-grid{
+        grid-template-columns:1fr 1fr;
+        gap:7px;
+    }
+
+    .project{
+        height:230px;
+    }
+
+    .project-info h3{
+        font-size:10px;
+    }
+
+    .services-grid{
+        grid-template-columns:1fr;
+    }
+
+    .service{
+        border-right:0;
+        min-height:125px;
+    }
+
+    .process-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .process-item{
+        padding-left:10px;
+    }
+
+    .quote{
+        padding-left:50px;
+    }
+
+    .quote p{
+        font-size:16px;
+    }
+
+    .cta-content{
+        padding:30px;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .cursor,
+    .cursor-ring{
+        display:none;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- GRAIN -->
+<div class="grain"></div>
+
+<!-- LOADER -->
+<div class="loader">
+    <div class="loader-logo">NA</div>
+    <div class="loader-line"></div>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<header class="nav">
+
+    <a href="#" class="logo">
+        <span class="logo-symbol">NA</span>
+        <span class="logo-name">NOIR ATELIER</span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="#work">WORK</a>
+        <a href="#services">SERVICES</a>
+        <a href="#about">ABOUT</a>
+        <a href="#process">PROCESS</a>
+        <a href="#journal">JOURNAL</a>
+        <a href="#contact">CONTACT</a>
+    </nav>
+
+    <a href="#contact" class="nav-button">
+        LET'S TALK
+        <span>+</span>
+    </a>
+
+</header>
+
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-title">
+        PANDU
+    </div>
+
+    <div class="hero-image">
+        <img
+            src="images/images.jpg"
+            alt="Creative portrait">
+    </div>
+
+    <div class="hero-copy">
+
+        <h2>
+            PANDU WILLIAN<br>
+            I STUDENT IN SENIOR HIGH SCHOOL MAMBAUS SHOLIHIN 2 Blitar,
+        </h2>
+
+        <p>
+            I'm a creative designer crafting refined,
+            visual experiences for brands, products,
+            and digital spaces.
+        </p>
+
+        <a href="#work" class="hero-button">
+            VIEW MY WORK
+            <span>+</span>
+        </a>
+
+    </div>
+
+    <div class="hero-orbit"></div>
+
+    <div class="scroll-indicator">
+        SCROLL
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SELECTED WORK
+===================================================== -->
+
+<section class="section projects" id="work">
+
+<div class="container">
+
+    <div class="section-head reveal">
+
+        <h2 class="section-title">
+            SELECTED WORK
+        </h2>
+
+        <div class="section-desc">
+            VIEW ALL PROJECTS &nbsp; ○
+        </div>
+
+    </div>
+
+
+    <div class="project-grid">
+
+        <article class="project reveal">
+
+            <img
+                src="images/images.jpg"
+                alt="Lumiere">
+
+            <div class="project-number">01</div>
+
+            <div class="project-info">
+                <h3>LUMIÈRE</h3>
+                <p>BRAND IDENTITY</p>
+            </div>
+
+        </article>
+
+
+        <article class="project reveal">
+
+            <img
+                src="images/pngtree-breathtaking-landscape-nature-s-stunning-beauty-scenic-vista-a-free-photo-image_16360602.jpg"
+                alt="Magazine">
+
+            <div class="images">02</div>
+
+            <div class="project-info">
+                <h3>AUREA MAGAZINE</h3>
+                <p>EDITORIAL DESIGN</p>
+            </div>
+
+        </article>
+
+
+        <article class="project reveal">
+
+            <img
+                src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
+                alt="Velvet and Oak">
+
+            <div class="project-number">03</div>
+
+            <div class="project-info">
+                <h3>VELVET & OAK</h3>
+                <p>WEB DESIGN</p>
+            </div>
+
+        </article>
+
+
+        <article class=">
+
+            <img
+                src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&w=800&q=80"
+                alt="Noir Studio">
+
+            <div class="project-number">04</div>
+
+            <div class="project-info">
+                <h3>NOIR STUDIO</h3>
+                <p>BRANDING</p>
+            </div>
+
+        </article>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section class="section" id="services">
+
+<div class="container">
+
+    <div class="section-head reveal">
+
+        <h2 class="section-title">
+            SERVICES
+        </h2>
+
+        <div class="section-desc">
+            TAILORED SOLUTIONS FOR AMBITIOUS BRANDS.
+        </div>
+
+    </div>
+
+
+    <div class="services-grid">
+
+        <div class="service reveal">
+
+            <div class="service-icon">✦</div>
+
+            <div class="service-number">01</div>
+
+            <h3>BRANDING</h3>
+
+            <p>
+                Strategic identities that
+                capture your essence and
+                resonate with your audience.
+            </p>
+
+        </div>
+
+
+        <div class="service reveal">
+
+            <div class="service-icon">✥</div>
+
+            <div class="service-number">02</div>
+
+            <h3>WEB DESIGN</h3>
+
+            <p>
+                Elegant, responsive websites
+                crafted for performance
+                and impact.
+            </p>
+
+        </div>
+
+
+        <div class="service reveal">
+
+            <div class="service-icon">◇</div>
+
+            <div class="service-number">03</div>
+
+            <h3>EDITORIAL DESIGN</h3>
+
+            <p>
+                Layouts and visual storytelling
+                that elevate content into
+                memorable experiences.
+            </p>
+
+        </div>
+
+
+        <div class="service reveal">
+
+            <div class="service-icon">☼</div>
+
+            <div class="service-number">04</div>
+
+            <h3>ART DIRECTION</h3>
+
+            <p>
+                Creative direction for
+                photoshoots, campaigns,
+                and brand environments.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROCESS
+===================================================== -->
+
+<section class="section process" id="process">
+
+<div class="container">
+
+    <div class="section-head reveal">
+
+        <h2 class="section-title">
+            THE PROCESS
+        </h2>
+
+        <div class="section-desc">
+            A THOUGHTFUL APPROACH FROM CONCEPT TO COMPLETION.
+        </div>
+
+    </div>
+
+
+    <div class="process-grid">
+
+        <div class="process-item reveal">
+
+            <div class="process-number">01</div>
+
+            <h3>DISCOVER</h3>
+
+            <p>
+                We start with a deep dive
+                into your vision, goals,
+                audience.
+            </p>
+
+        </div>
+
+
+        <div class="process-item reveal">
+
+            <div class="process-number">02</div>
+
+            <h3>DEFINE</h3>
+
+            <p>
+                Research, strategy, and
+                concepts that lay the
+                perfect foundation.
+            </p>
+
+        </div>
+
+
+        <div class="images">
+
+            <div class="process-number">03</div>
+
+            <h3>DESIGN</h3>
+
+            <p>
+                Crafting refined visuals
+                that communicate your
+                brand with clarity.
+            </p>
+
+        </div>
+
+
+        <div class="process-item reveal">
+
+            <div class="process-number">04</div>
+
+            <h3>DELIVER</h3>
+
+            <p>
+                Polished, high-quality
+                assets delivered with
+                attention to every detail.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TESTIMONIAL
+===================================================== -->
+
+<section class="section" id="about">
+
+<div class="container">
+
+    <div class="section-head reveal">
+
+        <h2 class="section-title">
+            KIND WORDS
+        </h2>
+
+        <div class="section-desc">
+            TRUSTED BY VISIONARIES AND LEADERS.
+        </div>
+
+    </div>
+
+
+    <div class="testimonial">
+
+        <div class="quote reveal">
+
+            <div class="quote-mark">
+                “
+            </div>
+
+            <p>
+                Working with Noir Atelier was a game changer.
+                Their attention to detail, communication, and
+                creativity brought our brand to life in ways
+                we never imagined.
+            </p>
+
+        </div>
+
+
+        <div class="client reveal">
+
+            <div class="client-avatar">
+                S
+            </div>
+
+            <div class="client-info">
+
+                <h4>
+                    SOFIA MARTIN
+                </h4>
+
+                <p>
+                    FOUNDER, LUMIÈRE
+                </p>
+
+                <div class="stars">
+                    • • • • •
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="section" id="contact">
+
+<div class="container">
+
+    <div class="cta reveal">
+
+        <div class="cta-content">
+
+            <h2>
+                HAVE A PROJECT
+                IN MIND?
+            </h2>
+
+            <p>
+                Let's create something timeless together.
+            </p>
+
+            <a href="mailto:hello@noiratelier.com" class="cta-button">
+                GET IN TOUCH &nbsp; →
+            </a>
+
+        </div>
+
+
+        <div class="cta-image">
+
+            <div class="cta-star">
+                ✦
+            </div>
+
+            <img
+                src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=85"
+                alt="Creative workspace">
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+<div class="container">
+
+    <div class="footer-top">
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                NA
+            </div>
+
+            <div class="footer-name">
+                NOIR ATELIER
+            </div>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="#">INSTAGRAM</a>
+            <a href="#">BEHANCE</a>
+            <a href="#">LINKEDIN</a>
+            <a href="#">PINTEREST</a>
+
+        </div>
+
+
+        <div class="footer-contact">
+
+            HELLO@NOIRATELIER.COM<br>
+            MILAN, ITALY
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <div>
+            © 2026 Noir Atelier. All rights reserved.
+        </div>
+
+        <a href="#" class="back-top">
+            ↑
+        </a>
+
+    </div>
+
+</div>
+
+</footer>
+
+</main>
+
+
+
+<script>
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        document.querySelector(".loader")
+            .classList.add("hide");
+
+    }, 900);
+
+});
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+const nav = document.querySelector(".nav");
+
+window.addEventListener("scroll", () => {
+
+    if(window.scrollY > 50){
+
+        nav.classList.add("scrolled");
+
+    }else{
+
+        nav.classList.remove("scrolled");
+
+    }
+
+});
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+const observer =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if(entry.isIntersecting){
+
+                    entry.target.classList.add("active");
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold:.12
+        }
+
+    );
+
+revealElements.forEach(element => {
+
+    observer.observe(element);
+
+});
+
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+const cursor =
+    document.querySelector(".cursor");
+
+const ring =
+    document.querySelector(".cursor-ring");
+
+let mouseX = 0;
+let mouseY = 0;
+
+let ringX = 0;
+let ringY = 0;
+
+document.addEventListener("mousemove", e => {
+
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    cursor.style.left = mouseX + "px";
+    cursor.style.top = mouseY + "px";
+
+});
+
+function animateCursor(){
+
+    ringX += (mouseX - ringX) * .12;
+    ringY += (mouseY - ringY) * .12;
+
+    ring.style.left = ringX + "px";
+    ring.style.top = ringY + "px";
+
+    requestAnimationFrame(animateCursor);
+
+}
+
+animateCursor();
+
+
+/* =========================================================
+   CURSOR HOVER
+========================================================= */
+
+const hoverTargets =
+    document.querySelectorAll(
+        "a, button, .project, .service"
+    );
+
+hoverTargets.forEach(item => {
+
+    item.addEventListener("mouseenter", () => {
+
+        document.body.classList.add("hovering");
+
+    });
+
+    item.addEventListener("mouseleave", () => {
+
+        document.body.classList.remove("hovering");
+
+    });
+
+});
+
+
+/* =========================================================
+   HERO PARALLAX
+========================================================= */
+
+const heroImage =
+    document.querySelector(".hero-image");
+
+const heroTitle =
+    document.querySelector(".hero-title");
+
+const orbit =
+    document.querySelector(".hero-orbit");
+
+window.addEventListener("scroll", () => {
+
+    const scroll = window.scrollY;
+
+    if(scroll < window.innerHeight){
+
+        heroImage.style.transform =
+            `translateX(-50%) translateY(${scroll * .12}px)`;
+
+        heroTitle.style.transform =
+            `translateY(${scroll * .04}px)`;
+
+        orbit.style.transform =
+            `translateY(${scroll * .08}px)`;
+
+    }
+
+});
+
+
+/* =========================================================
+   PROJECT IMAGE TILT
+========================================================= */
+
+document.querySelectorAll(".project")
+.forEach(card => {
+
+    card.addEventListener("mousemove", e => {
+
+        const rect =
+            card.getBoundingClientRect();
+
+        const x =
+            e.clientX - rect.left;
+
+        const y =
+            e.clientY - rect.top;
+
+        const rotateX =
+            ((y / rect.height) - .5) * -4;
+
+        const rotateY =
+            ((x / rect.width) - .5) * 4;
+
+        card.style.transform =
+            `perspective(800px)
+             rotateX(${rotateX}deg)
+             rotateY(${rotateY}deg)`;
+
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+        card.style.transform =
+            "perspective(800px) rotateX(0) rotateY(0)";
+
+    });
+
+});
+
+
+/* =========================================================
+   STAGGER ANIMATION
+========================================================= */
+
+document.querySelectorAll(
+    ".project-grid .project, .services-grid .service, .process-item"
+).forEach((element,index) => {
+
+    element.style.transitionDelay =
+        `${index * 80}ms`;
+
+});
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+document.querySelector(".back-top")
+.addEventListener("click", e => {
+
+    e.preventDefault();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+});
+
+
+/* =========================================================
+   SMOOTH ANCHOR
+========================================================= */
+
+document.querySelectorAll('a[href^="#"]')
+.forEach(link => {
+
+    link.addEventListener("click", function(e){
+
+        const target =
+            document.querySelector(
+                this.getAttribute("href")
+            );
+
+        if(target){
+
+            e.preventDefault();
+
+            target.scrollIntoView({
+                behavior:"smooth"
+            });
+
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
